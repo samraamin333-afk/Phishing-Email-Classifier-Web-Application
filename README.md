@@ -151,18 +151,12 @@ $$\text{Log-Odds}(w) = \ln \left( \frac{P(w \mid \text{Phishing})}{P(w \mid \tex
 ```
 phishing-email-classifier/
 ├── README.md                      # Comprehensive system documentation & portfolio showcase
-├── LINKEDIN_PACKAGE.md            # Viral LinkedIn post copies, carousel guide & profile entries
 ├── requirements.txt               # Dependencies (Flask, Scikit-learn, Matplotlib, Pandas)
 ├── .gitignore                     # Git ignore rules
 ├── app.py                         # Flask web app and REST API server
 ├── generate_linkedin_charts.py    # 300 DPI LinkedIn infographics & banner generator
 ├── run_app.bat                    # One-click Windows launcher
 ├── setup_github.bat               # Git repository initialization and push helper
-├── assets/
-│   ├── linkedin_performance_dashboard.png # 4-panel evaluation infographic
-│   ├── linkedin_architecture_banner.png   # 16:9 modern pipeline flowchart banner
-│   ├── linkedin_carousel_cover.png        # 1:1 high-impact thumbnail badge
-│   └── linkedin_carousel_slides.html      # 1080x1080px 5-slide PDF carousel
 ├── data/
 │   ├── raw_dataset.csv            # 3,000 balanced benchmark email samples
 │   ├── sample_test_cases.json     # Curated attack presets for interactive UI
