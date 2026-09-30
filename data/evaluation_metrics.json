@@ -1,0 +1,142 @@
+{
+  "model_name": "Calibrated Multinomial Naive Bayes",
+  "dataset_size": 3000,
+  "train_samples": 2400,
+  "test_samples": 600,
+  "vocabulary_size": 1792,
+  "accuracy": 98.17,
+  "precision": 98.65,
+  "recall": 97.67,
+  "f1_score": 98.16,
+  "roc_auc": 0.9994,
+  "confusion_matrix": {
+    "true_negatives": 296,
+    "false_positives": 4,
+    "false_negatives": 7,
+    "true_positives": 293
+  },
+  "top_phishing_features": [
+    {
+      "feature": "will",
+      "weight": 5.92
+    },
+    {
+      "feature": "token_url",
+      "weight": 5.78
+    },
+    {
+      "feature": "immediately",
+      "weight": 5.73
+    },
+    {
+      "feature": "not",
+      "weight": 5.67
+    },
+    {
+      "feature": "24 hours",
+      "weight": 5.66
+    },
+    {
+      "feature": "hours",
+      "weight": 5.66
+    },
+    {
+      "feature": "automated",
+      "weight": 5.46
+    },
+    {
+      "feature": "unauthorized",
+      "weight": 5.45
+    },
+    {
+      "feature": "wire",
+      "weight": 5.43
+    },
+    {
+      "feature": "wire transfer",
+      "weight": 5.43
+    },
+    {
+      "feature": "transfer",
+      "weight": 5.43
+    },
+    {
+      "feature": "within",
+      "weight": 5.43
+    },
+    {
+      "feature": "within 24",
+      "weight": 5.43
+    },
+    {
+      "feature": "card",
+      "weight": 5.43
+    },
+    {
+      "feature": "permanent",
+      "weight": 5.41
+    }
+  ],
+  "top_legitimate_features": [
+    {
+      "feature": "discussion",
+      "weight": 6.33
+    },
+    {
+      "feature": "key",
+      "weight": 6.21
+    },
+    {
+      "feature": "results",
+      "weight": 6.2
+    },
+    {
+      "feature": "allocation",
+      "weight": 6.2
+    },
+    {
+      "feature": "release",
+      "weight": 6.2
+    },
+    {
+      "feature": "performance",
+      "weight": 6.2
+    },
+    {
+      "feature": "dates performance",
+      "weight": 6.16
+    },
+    {
+      "feature": "resource allocation",
+      "weight": 6.16
+    },
+    {
+      "feature": "dates",
+      "weight": 6.16
+    },
+    {
+      "feature": "discussion points",
+      "weight": 6.16
+    },
+    {
+      "feature": "allocation across",
+      "weight": 6.16
+    },
+    {
+      "feature": "squads",
+      "weight": 6.16
+    },
+    {
+      "feature": "key discussion",
+      "weight": 6.16
+    },
+    {
+      "feature": "performance testing",
+      "weight": 6.16
+    },
+    {
+      "feature": "timeline",
+      "weight": 6.16
+    }
+  ]
+}

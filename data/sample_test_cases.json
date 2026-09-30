@@ -1,0 +1,44 @@
+[
+  {
+    "id": "preset_paypal_phish",
+    "name": "PayPal - Account Suspended (Phishing)",
+    "subject": "URGENT: Your PayPal Account Has Been Suspended",
+    "body": "Dear Verified Customer,\n\nWe detected unauthorized access to your account from an unknown IP address (194.26.29.112) in Moscow, Russia.\nFor your protection, your access has been temporarily restricted and any pending debit card transactions have been frozen.\n\nTo restore your account and verify your identity, you must immediately access our resolution center:\nhttp://192.168.1.105/paypal/auth/login.php\n\nFailure to verify your identity within 24 hours will result in permanent account termination and forfeiture of funds.\n\nSincerely,\nPayPal Security & Risk Department",
+    "expected": "Phishing"
+  },
+  {
+    "id": "preset_ceo_fraud",
+    "name": "CEO Wire Transfer Fraud (Spear Phishing)",
+    "subject": "Confidential: Urgent Wire Transfer Request Before 4 PM",
+    "body": "Are you at your desk right now?\n\nI am currently in an executive board meeting and cannot take phone calls.\nWe are finalizing an expedited acquisition and need an urgent wire transfer of $48,500 processed to our escrow legal counsel before market close at 4:00 PM EST today.\n\nPlease confirm receipt immediately so I can send the overseas bank account and routing number.\nKeep this strictly confidential until the official press release tomorrow.\n\nBest,\nJonathan Davis\nChief Executive Officer",
+    "expected": "Phishing"
+  },
+  {
+    "id": "preset_m365_harvest",
+    "name": "Microsoft 365 Password Expiration (Phishing)",
+    "subject": "Action Required: Microsoft 365 Password Expires In 24 Hours",
+    "body": "IT Help Desk Alert:\n\nYour corporate Microsoft 365 single sign-on (SSO) password will expire in 24 hours.\nTo prevent interruption to your Outlook mailbox, SharePoint access, and Teams messaging, please retain your current password by verifying your credentials below.\n\nUpdate Password:\nhttp://microsoft-portal-login.top/auth/verify?user=admin\n\nIf you do not update before 5:00 PM, your account will be locked out and will require IT Administrator intervention.\n\nGlobal IT Support Services",
+    "expected": "Phishing"
+  },
+  {
+    "id": "preset_fedex_scam",
+    "name": "FedEx Delivery Exception (Phishing)",
+    "subject": "FedEx Express: Package Delivery Exception #FDX-99218",
+    "body": "Attention Recipient,\n\nA courier attempted to deliver your parcel containing important documents today at 11:32 AM, but the delivery address on file is incomplete.\nA redelivery fee of $2.95 is required to release the customs hold.\n\nPlease confirm your residential address and pay the dispatch fee:\nhttp://fedex-express-customs-clearance.info/pay\n\nIf unclaimed within 48 hours, package will be returned to sender.\n\nFedEx Logistics Team",
+    "expected": "Phishing"
+  },
+  {
+    "id": "preset_eng_sync",
+    "name": "Engineering Sprint Sync (Legitimate)",
+    "subject": "Sprint 24 Retrospective & Microservices Migration Notes",
+    "body": "Hi team,\n\nThanks for joining today's sprint retrospective! Here is a recap of our key discussion points:\n1. Completed migration of the auth service to Kubernetes cluster v1.30.\n2. Database query latency dropped by 34% after indexing the orders table.\n3. Code review for PR #342 is ready on GitHub\u2014please review when you have a moment.\n\nNext sprint planning will take place this Thursday at 10:00 AM EST. Please update your tickets in JIRA prior to the call.\n\nBest regards,\nAlex Mercer\nStaff Software Engineer",
+    "expected": "Legitimate"
+  },
+  {
+    "id": "preset_client_followup",
+    "name": "Client Onboarding & Project Scope (Legitimate)",
+    "subject": "Follow-up: Q4 Analytics Dashboard Scope & Timeline",
+    "body": "Hello Marcus,\n\nIt was wonderful speaking with you and the analytics team yesterday.\nAs discussed during our demo, our team will deliver the initial interactive prototype by next Friday.\n\nI've attached the draft service level agreement (SLA) and requirements document for your team's review.\nLet us know if you need any adjustments to the milestone schedule before our kickoff sync.\n\nWarm regards,\nSarah Jenkins\nDirector of Client Solutions",
+    "expected": "Legitimate"
+  }
+]

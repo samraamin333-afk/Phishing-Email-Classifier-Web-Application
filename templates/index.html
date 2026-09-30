@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Email Classifier & Web Application | Real-Time Threat Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-text">
+                <h1>Phishing Email Classifier</h1>
+                <p>NLP Feature Extraction (TF-IDF) &bull; Multinomial Naive Bayes &bull; Real-Time Threat Scoring</p>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                <span>{{ metrics.accuracy }}% Accuracy Model Live</span>
+            </div>
+            <a href="/" class="nav-btn active">Threat Scanner</a>
+            <a href="/metrics" class="nav-btn">Model Benchmarks</a>
+        </div>
+    </header>
+
+    <!-- Quick Presets -->
+    <section class="presets-section">
+        <div class="preset-title">
+            <span>⚡ Quick Test Presets (Click to load & scan):</span>
+        </div>
+        <div class="presets-container">
+            {% for p in presets %}
+            <button class="preset-btn {% if p.expected == 'Phishing' %}phish{% else %}ham{% endif %}"
+                    data-subject="{{ p.subject | e }}"
+                    data-body="{{ p.body | e }}">
+                {% if p.expected == 'Phishing' %}🚨{% else %}✅{% endif %} {{ p.name }}
+            </button>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Main Grid -->
+    <main class="main-grid">
+        <!-- Left Column: Email Input Form -->
+        <section class="panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <span>✉️</span>
+                    <span>Incoming Email Payload</span>
+                </h2>
+                <span style="font-size: 12px; color: var(--text-faint);">Raw or HTML formatted text</span>
+            </div>
+
+            <form id="scanForm">
+                <div class="form-group">
+                    <label for="emailSubject" class="form-label">Email Subject Header</label>
+                    <input type="text" id="emailSubject" class="form-control" placeholder="e.g. URGENT: Your PayPal Account Has Been Suspended" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="emailBody" class="form-label">Email Body (Plain Text or HTML)</label>
+                    <textarea id="emailBody" class="form-control" placeholder="Paste email content here to analyze threat vectors, linguistic markers, and phishing probabilities..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="scanBtn" class="btn-primary">
+                        <span>🔍 Scan Threat Vectors</span>
+                    </button>
+                    <button type="button" id="clearBtn" class="btn-secondary">
+                        Clear
+                    </button>
+                </div>
+            </form>
+
+            <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-size: 12px; color: var(--text-faint);">
+                <span>Engine: TF-IDF (1,2-grams) + Naive Bayes</span>
+                <span>Inference Latency: &lt; 3.0ms</span>
+            </div>
+        </section>
+
+        <!-- Right Column: Real-Time Threat Analysis Display -->
+        <section class="panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <span>🛡️</span>
+                    <span>Threat Analysis & Confidence Score</span>
+                </h2>
+            </div>
+
+            <!-- Initial Placeholder -->
+            <div id="placeholderContainer" class="result-placeholder">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+                <h3 style="font-size: 16px; color: var(--text-muted); margin-bottom: 8px;">Awaiting Email Inspection</h3>
+                <p style="font-size: 13px; max-width: 320px;">
+                    Select one of the sample attack presets above or paste email content on the left to execute real-time threat classification.
+                </p>
+            </div>
+
+            <!-- Dynamic Results Container -->
+            <div id="resultsContainer" style="display: none;">
+                <!-- Verdict Banner -->
+                <div id="verdictBanner" class="verdict-banner phish">
+                    <div class="verdict-info">
+                        <h3 id="verdictTitle">PHISHING EMAIL DETECTED</h3>
+                        <p id="verdictSubtitle">High probability malicious communication flagged by Naive Bayes.</p>
+                    </div>
+                    <span id="verdictBadge" class="badge-tag phish">CRITICAL THREAT</span>
+                </div>
+
+                <!-- Threat Meter -->
+                <div class="meter-card">
+                    <div class="meter-header">
+                        <span>Threat Confidence Score</span>
+                        <span id="threatScoreVal" style="color: var(--accent-cyan);">98.4%</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div id="meterFill" class="meter-fill phish" style="width: 98.4%;"></div>
+                    </div>
+                    <div class="probability-row">
+                        <span>Phishing Probability: <strong id="probPhish">98.4%</strong></span>
+                        <span>Legitimate Probability: <strong id="probHam">1.6%</strong></span>
+                    </div>
+                </div>
+
+                <!-- Extracted Heuristics -->
+                <div class="heuristics-grid">
+                    <div class="heuristic-item">
+                        <div id="hUrlCount" class="heuristic-val">1</div>
+                        <div class="heuristic-label">Deceptive URLs</div>
+                    </div>
+                    <div class="heuristic-item">
+                        <div id="hIpUrl" class="heuristic-val alert">DETECTED</div>
+                        <div class="heuristic-label">Raw IP Destination</div>
+                    </div>
+                    <div class="heuristic-item">
+                        <div id="hUrgentKw" class="heuristic-val alert">3</div>
+                        <div class="heuristic-label">Urgency Cues</div>
+                    </div>
+                    <div class="heuristic-item">
+                        <div id="hCapsRatio" class="heuristic-val">18%</div>
+                        <div class="heuristic-label">Caps Stress Ratio</div>
+                    </div>
+                </div>
+
+                <!-- Explainable AI (XAI) Feature Attribution -->
+                <div class="tokens-section">
+                    <div class="tokens-title">Model Explainability: Dominant Token Signals</div>
+                    <div id="tokenCloud" class="token-cloud">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Security Recommendations -->
+                <div class="recs-card">
+                    <div class="recs-title">
+                        <span>🛡️</span>
+                        <span>SOC Security Recommendations</span>
+                    </div>
+                    <ul id="recsList" class="recs-list">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Developer REST API Documentation Box -->
+    <section class="api-box">
+        <h3>
+            <span>⚡</span>
+            <span>Enterprise Integration: Headless REST API</span>
+        </h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            Incorporate this classifier directly into your email gateway, spam filter hook, or SIEM pipeline using our JSON API endpoint.
+        </p>
+        <div class="code-snippet">curl -X POST http://127.0.0.1:5000/api/scan \
+     -H "Content-Type: application/json" \
+     -d '{"subject": "Urgent: Verify Your Account", "body": "Click here to re-authenticate: http://192.168.1.1/login"}'</div>
+    </section>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
